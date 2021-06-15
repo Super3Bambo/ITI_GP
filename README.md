@@ -1,1 +1,3 @@
 # ITI_GP
+## Metro-Booking
+Metro station tickets system, where users can search and display lines to book their seats faster and keep track of the trip.
