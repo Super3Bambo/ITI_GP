@@ -4,6 +4,7 @@ import auth from '@react-native-firebase/auth';
 import { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
 
+
 const Home = (props)=> {
 useEffect(()=>{
   // firestore().collection('Users').onSnapshot(QuerySnapshot=>{
@@ -14,11 +15,15 @@ useEffect(()=>{
 },[])
 
 
-   /* return (
+const Home = (props)=> {
+
+    return (
      <View><Button title="Book" onPress={()=>{
        props.navigation.navigate('Booking')
-     }}></Button>
+     }}></Button></View>
+  );
      
+
      
 
 <Button title="logout" onPress={ async () => {
@@ -78,18 +83,5 @@ useEffect(()=>{
 
 
   };
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-    },
-  });
   export default Home;
   
