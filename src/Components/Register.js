@@ -1,9 +1,16 @@
 import React from 'react';
-import {Text,View} from 'react-native';
+import {Text,View,Button} from 'react-native';
 
-const Register = ()=> {
+const Register = (props)=> {
     return (
-     <View><Text>Register</Text></View>
+     <View><Text>Register</Text>
+     <Button
+     title={"test"} 
+     onPress={()=>{
+       console.log(props)
+       props.navigation.navigate("TabNav")
+     }}></Button>
+     </View>
     );
   };
   

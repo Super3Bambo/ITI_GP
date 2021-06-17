@@ -3,7 +3,6 @@ import {StyleSheet,Text,View,Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import FawrySdk from 'react-native-fawry-sdk';
 
 const Home = (props)=> {
 useEffect(()=>{
@@ -11,41 +10,9 @@ useEffect(()=>{
   //    QuerySnapshot.docs.forEach((doc)=>{console.log(doc._data.names);});
   // });
 
-  FawrySdk.initSDK(FawrySdk.STYLES.STYLE1);
- return ()=>{FawrySdk.resetFawrySDK();}
+  
 },[])
 
-initPaymentPlugin = () => {
-  const data = {
-    merchantID: "1tSa6uxz2nTwlaAmt38enA==",
-    serverURL:"https://fawry.com" ,
-    items: [
-      {
-        price: '100',
-        description: 'Hello',
-        quantity: '1',
-        sku: '1234',
-      },
-    ],
-    language: FawrySdk.LANGUAGES.EN,
-  };
-  FawrySdk.initPaymentPlugin(data);
-};
-
-initCardTokenizer = () => {
-  const data = {
-    merchantID: "1tSa6uxz2nTwlaAmt38enA==",
-    serverURL:"https://fawry.com" ,
-    customerEmail: 'mahmoud.ali@1trolley.com',
-    customerMobile: '01115299051',
-    language: FawrySdk.LANGUAGES.EN,
-  };
-  FawrySdk.initCardTokenizer(data);
-};
-
-startPaymentActivity = () => {
-  FawrySdk.startPaymentActivity();
-};
 
    /* return (
      <View><Button title="Book" onPress={()=>{
@@ -101,20 +68,11 @@ startPaymentActivity = () => {
       <View style={styles.container}>
         <Text style={styles.welcome}>☆FawrySdk example☆</Text>
 
-        <Button
-          title={'Init Payment Plugin'}
-          onPress={this.initPaymentPlugin}
-        />
+       
 
-        <Button
-          title={'Init Card Tokenizer'}
-          onPress={this.initCardTokenizer}
-        />
+       
 
-        <Button
-          title={'start payment activity'}
-          onPress={this.startPaymentActivity}
-        />
+       
       </View>
     );
 

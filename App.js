@@ -1,22 +1,27 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
- import Booking from "./src/Components/Booking";
- import HomeNavigators from './src/Navigators/HomeNavigators'
- import ProfileNavigators from './src/Navigators/ProfileNavigators'
+import {createStackNavigator} from '@react-navigation/stack'
+import OnBoarding from './src/Components/OnBoardring';
+import Register from './src/Components/Register';
+import TabNavigators from './src/Navigators/TabNavigators';
 
 
-const Tab = createMaterialBottomTabNavigator();
+const Stack=createStackNavigator()
 
 const App = ()=> {
   return (
     <NavigationContainer >
-        <Tab.Navigator initialRouteName="Home">
-          <Tab.Screen name="Home" component={HomeNavigators}/>
-          <Tab.Screen name="Booking" component={Booking}/> 
-          <Tab.Screen name="Profile" component={ProfileNavigators}/> 
-        </Tab.Navigator>
+       <Stack.Navigator headerMode="none">
+        <Stack.Screen name="onBoarding" component={OnBoarding} />
+        <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name="TabNav"
+         component={TabNavigators}
+         
+         />
+        
+    </Stack.Navigator>
+        
     </NavigationContainer>
 
   );
