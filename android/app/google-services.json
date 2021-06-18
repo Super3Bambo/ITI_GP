@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "79449135255",
-    "project_id": "metro-c38c9",
-    "storage_bucket": "metro-c38c9.appspot.com"
+    "project_number": "743132564416",
+    "project_id": "iti-task-1fc63",
+    "storage_bucket": "iti-task-1fc63.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:79449135255:android:897b995e45d1a1cb74f1d2",
+        "mobilesdk_app_id": "1:743132564416:android:f819ad5449a1814e6bd625",
         "android_client_info": {
-          "package_name": "com.metro_reservation"
+          "package_name": "com.example.firebasetask"
         }
       },
       "oauth_client": [
         {
-          "client_id": "79449135255-qd2thd0fi5hfoun9rdj3egn6i5kbeqpm.apps.googleusercontent.com",
+          "client_id": "743132564416-2ikjuc0p8hrbak6mls49trf13hq1hupg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAkDs35OCr7Lh-F4wZjBiedAs9s0QP87oA"
+          "current_key": "AIzaSyBLcmEWNsgx1ksnYAQZbFc2iA56S66-Q9A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "79449135255-qd2thd0fi5hfoun9rdj3egn6i5kbeqpm.apps.googleusercontent.com",
+              "client_id": "743132564416-2ikjuc0p8hrbak6mls49trf13hq1hupg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
