@@ -4,8 +4,9 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import registerStyle from '../Styles/register';
-import FirebaseUtilities from '../Utilities/firebase';
+import FirebaseUtilities from '../Utilities/firebaseAuth';
 import Validator from '../Utilities/inputValidation';
+import userOperation from './../Utilities/firebaseDatabase';
 
 const Register = () => {
   const [userName, setUserName] = useState('');
@@ -14,6 +15,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('male');
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorFlag, setErrorFlag] = useState(null);
   let signUp = (
     name,
     emailValue,
@@ -22,39 +25,80 @@ const Register = () => {
     phone,
     genderflag,
   ) => {
-    if (
-      !Validator.requiredValidator(name) &&
-      !Validator.requiredValidator(emailValue) &&
-      !Validator.requiredValidator(passwordValue) &&
-      !Validator.requiredValidator(passwordConValue) &&
-      !Validator.requiredValidator(phone) &&
-      !Validator.requiredValidator(genderflag)
-    ) {
-      if (Validator.confirmPasswordVlaidator(passwordValue, passwordConValue)) {
-        if (Validator.passwordValidator(passwordValue)) {
-          if (Validator.emailValidtaor(emailValue)) {
-            if (Validator.phoneNumberValidtaor(phone)) {
-              FirebaseUtilities.signUp(emailValue, passwordValue)
-                .then(() => {
-                  console.log('user created');
-                })
-                .catch(e => {
-                  console.log(e);
-                });
-            } else {
-              console.log('please enter valid phone number');
-            }
-          } else {
-            console.log('pleae enter valid mail');
-          }
-        } else {
-          console.log('please enter valid password');
-        }
+    console.log('pressed', emailValue, passwordValue);
+    FirebaseUtilities.signUp(emailValue, passwordValue)
+      .then(() => {
+        console.log('user Created');
+        userOperation.createNewUser(
+          name,
+          emailValue,
+          passwordValue,
+          phone,
+          gender,
+        );
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+  let validate = (value, type) => {
+    if (type == 'userName') {
+      if (!Validator.requiredValidator(value)) {
+        console.log('name is  vaild');
+        setUserName(value);
+        setErrorMsg(null);
+        setErrorFlag(false);
       } else {
-        console.log('please enter identical password');
+        setErrorFlag(true);
+        setErrorMsg('Please Enter Valid name');
       }
-    } else {
-      console.log('please enter value');
+    } else if (type == 'email') {
+      if (
+        !Validator.requiredValidator(value) &&
+        Validator.emailValidtaor(value)
+      ) {
+        console.log('email is vaild');
+        setEmail(value);
+        setErrorMsg(null);
+        setErrorFlag(false);
+      } else {
+        console.log('email is not vaild');
+        setErrorFlag(true);
+        setErrorMsg('Please Enter Valid mail');
+      }
+    } else if (type == 'password') {
+      if (
+        !Validator.requiredValidator(value) &&
+        Validator.passwordValidator(value)
+      ) {
+        console.log('password is vaild');
+        setErrorFlag(false);
+      } else {
+        setErrorFlag(true);
+        setErrorMsg('Please Enter Valid password');
+      }
+    } else if (type == 'confirmPassword') {
+      if (
+        !Validator.requiredValidator(value) &&
+        Validator.confirmPasswordVlaidator(value)
+      ) {
+        console.log('con is  vaild');
+        setErrorFlag(false);
+      } else {
+        setErrorFlag(true);
+        setErrorMsg('Please Enter identical password');
+      }
+    } else if (type == 'phoneNumber') {
+      if (
+        !Validator.requiredValidator(value) &&
+        Validator.phoneNumberValidtaor(value)
+      ) {
+        console.log('phone number is vaild');
+        setErrorFlag(false);
+      } else {
+        setErrorMsg('Please Enter Valid phone number');
+        setErrorFlag(true);
+      }
     }
   };
 
@@ -68,6 +112,9 @@ const Register = () => {
             style={registerStyle.inputStyle}
             leftIcon={<Icon name="user" style={registerStyle.iconStyle} />}
             onChangeText={value => setUserName(value)}
+            onEndEditing={value => validate(value, 'userName')}
+            onPressOut={value => validate(value, 'userName')}
+            errorMessage={errorFlag ? errorMsg : null}
           />
           <Input
             style={registerStyle.inputStyle}
@@ -75,6 +122,9 @@ const Register = () => {
             placeholder="Email"
             leftIcon={<Icon name="envelope" style={registerStyle.iconStyle} />}
             onChangeText={value => setEmail(value)}
+            onEndEditing={value => validate(value, 'email')}
+            onPressOut={value => validate(value, 'email')}
+            errorMessage={errorFlag ? errorMsg : null}
           />
           <Input
             style={registerStyle.inputStyle}
@@ -82,6 +132,9 @@ const Register = () => {
             placeholder="Password"
             leftIcon={<Icon name="lock" style={registerStyle.iconStyle} />}
             onChangeText={value => setPassword(value)}
+            onEndEditing={value => validate(value, 'password')}
+            onPressOut={value => validate(value, 'password')}
+            errorMessage={errorFlag ? errorMsg : null}
           />
           <Input
             style={registerStyle.inputStyle}
@@ -89,6 +142,9 @@ const Register = () => {
             placeholder="Confirm Password"
             leftIcon={<Icon name="lock" style={registerStyle.iconStyle} />}
             onChangeText={value => setConfirmPassword(value)}
+            onEndEditing={value => validate(value, 'confirmPassword')}
+            onPressOut={value => validate(value, 'confirmPassword')}
+            errorMessage={errorFlag ? errorMsg : null}
           />
           <Input
             style={registerStyle.inputStyle}
@@ -96,6 +152,9 @@ const Register = () => {
             placeholder="Phone Number"
             leftIcon={<Icon name="phone" style={registerStyle.iconStyle} />}
             onChangeText={value => setPhoneNumber(value)}
+            onEndEditing={value => validate(value, 'phoneNumber')}
+            onPressOut={value => validate(value, 'phoneNumber')}
+            errorMessage={errorFlag ? errorMsg : null}
           />
         </View>
 
