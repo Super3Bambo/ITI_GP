@@ -5,6 +5,7 @@ import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import registerStyle from '../Styles/register';
 import FirebaseUtilities from '../Utilities/firebase';
+import Validator from '../Utilities/inputValidation';
 
 const Register = () => {
   const [userName, setUserName] = useState('');
@@ -13,6 +14,49 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('male');
+  let signUp = (
+    name,
+    emailValue,
+    passwordValue,
+    passwordConValue,
+    phone,
+    genderflag,
+  ) => {
+    if (
+      !Validator.requiredValidator(name) &&
+      !Validator.requiredValidator(emailValue) &&
+      !Validator.requiredValidator(passwordValue) &&
+      !Validator.requiredValidator(passwordConValue) &&
+      !Validator.requiredValidator(phone) &&
+      !Validator.requiredValidator(genderflag)
+    ) {
+      if (Validator.confirmPasswordVlaidator(passwordValue, passwordConValue)) {
+        if (Validator.passwordValidator(passwordValue)) {
+          if (Validator.emailValidtaor(emailValue)) {
+            if (Validator.phoneNumberValidtaor(phone)) {
+              FirebaseUtilities.signUp(emailValue, passwordValue)
+                .then(() => {
+                  console.log('user created');
+                })
+                .catch(e => {
+                  console.log(e);
+                });
+            } else {
+              console.log('please enter valid phone number');
+            }
+          } else {
+            console.log('pleae enter valid mail');
+          }
+        } else {
+          console.log('please enter valid password');
+        }
+      } else {
+        console.log('please enter identical password');
+      }
+    } else {
+      console.log('please enter value');
+    }
+  };
 
   return (
     <ScrollView>
@@ -77,20 +121,16 @@ const Register = () => {
 
         <TouchableOpacity
           style={registerStyle.submitBtn}
-          onPress={() => {
-            console.log(
-              'Pressed',
+          onPress={() =>
+            signUp(
               userName,
               email,
-              phoneNumber,
               password,
               confirmPassword,
+              phoneNumber,
               gender,
-            );
-            FirebaseUtilities.signUp(email, password).catch(e => {
-              console.log('User is not created');
-            });
-          }}>
+            )
+          }>
           <Text style={registerStyle.textBtn}>Sign Up</Text>
         </TouchableOpacity>
       </View>

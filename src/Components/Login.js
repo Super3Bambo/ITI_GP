@@ -4,10 +4,25 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import registerStyle from '../Styles/register';
 import FirebaseUtilities from '../Utilities/firebase';
+import Validator from '../Utilities/inputValidation';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  let signIn = (emailValue, passwordValue) => {
+    if (
+      !Validator.requiredValidator(emailValue) &&
+      !Validator.requiredValidator(passwordValue)
+    ) {
+      console.log(Validator.requiredValidator(emailValue));
+      console.log(Validator.requiredValidator(passwordValue));
+      console.log('Pressed', emailValue, passwordValue);
+      FirebaseUtilities.signIn(emailValue, passwordValue);
+      console.log('Done');
+    } else {
+      console.log('Please Enter email and/or password');
+    }
+  };
 
   return (
     <ScrollView>
@@ -31,11 +46,7 @@ const Login = () => {
 
         <TouchableOpacity
           style={registerStyle.submitBtn}
-          onPress={() => {
-            console.log('Pressed', email, password);
-            FirebaseUtilities.signIn(email, password);
-            console.log('Done');
-          }}>
+          onPress={() => signIn(email, password)}>
           <Text style={registerStyle.textBtn}>Sign In</Text>
         </TouchableOpacity>
       </View>
