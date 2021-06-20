@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   home:{
     backgroundColor:'#f3f8fe',
     //borderRadius:100
+    
   },
   title:{
     fontSize:35,
