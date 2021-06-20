@@ -6,11 +6,20 @@ import OnBoarding from './src/Components/OnBoardring';
 import Register from './src/Components/Register';
 import TabNavigators from './src/Navigators/TabNavigators';
 
+import PromiseMW from 'redux-promise';
+import {Provider} from 'react-redux';
+import {applyMiddleware,createStore} from 'redux';
+
+import RootReducer from './src/Redux/reducers/index'
+
 
 const Stack=createStackNavigator()
 
+const createStoreWithMW=applyMiddleware(PromiseMW)(createStore);
+
 const App = ()=> {
   return (
+    <Provider store={createStoreWithMW(RootReducer)}>
     <NavigationContainer >
        <Stack.Navigator headerMode="none">
         <Stack.Screen name="onBoarding" component={OnBoarding} />
@@ -23,6 +32,7 @@ const App = ()=> {
     </Stack.Navigator>
         
     </NavigationContainer>
+    </Provider>
 
   );
 };

@@ -5,14 +5,8 @@ import { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
 
 
-const Home = (props)=> {
-useEffect(()=>{
-  // firestore().collection('Users').onSnapshot(QuerySnapshot=>{
-  //    QuerySnapshot.docs.forEach((doc)=>{console.log(doc._data.names);});
-  // });
 
-  
-},[])
+
 
 
 const Home = (props)=> {
@@ -26,11 +20,7 @@ const Home = (props)=> {
 
      
 
-<Button title="logout" onPress={ async () => {
-
-
-
-
+{/* <Button title="logout" onPress={ async () => { */}
 //  const usersCollection = await firestore().collection('Users');
 //  usersCollection.docs.forEach((doc)=>{console.log(doc._data.names);})
 // const PaymentData = {
@@ -64,9 +54,9 @@ const Home = (props)=> {
 //     body: JSON.stringify(PaymentData),
 //   });
 //  console.log(response)
-     }}></Button>
-     </View>
-    );*/
+    //  }}></Button>
+    //  </View>
+    // );*/
 
 
     return (

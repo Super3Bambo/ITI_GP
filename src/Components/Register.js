@@ -11,7 +11,11 @@ import {
 import { RadioButton } from "react-native-paper";
 import registerStyle from './../Styles/register';
 
-const Register = () => {
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
+import { getUser } from "../Redux/actions/userActions";
+
+const Register = (props) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -94,6 +98,8 @@ const Register = () => {
               confirmPassword,
               gender
             );
+            props.getUser(20)
+            console.log(props.currentUser)
           }}
         >
           <Text style={registerStyle.textBtn}>Sign Up</Text>
@@ -103,6 +109,14 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapDiapatchToProps =(dispatch)=>{
+  return bindActionCreators({getUser}, dispatch)
+}
+let mapStateToProps = (state) => {
+ // console.log("mapStateToProps", state)
+  return { currentUser: state.UserReducer.currentUser }
+
+}
+export default connect(mapStateToProps,mapDiapatchToProps)(Register);
 
 
