@@ -8,9 +8,11 @@ import firestore from '@react-native-firebase/firestore';
 
 
 
+
 import CarouselCards from './Home Files/slider'
 import { color } from 'react-native-reanimated';
 import {Button} from 'native-base'
+
 
 const Home = (props) => {
 
@@ -50,11 +52,6 @@ const Home = (props) => {
 
       </View>
 
-      {/* <View>
-    <Button style={styles.btn}>
-        <Text style={{fontSize:20}}>Book Now</Text>
-    </Button>
-</View> */}
 
 
       <View style={styles.btn_container}>
