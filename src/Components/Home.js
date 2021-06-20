@@ -6,6 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 
 
 
+
+
 import CarouselCards from './Home Files/slider'
 import { color } from 'react-native-reanimated';
 import {Button} from 'native-base'
@@ -66,6 +68,7 @@ const Home = (props) => {
     </ScrollView>
 
   );
+
 
 };
 
@@ -132,6 +135,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,  
         elevation: 6
   },
+
 
 });
 export default Home;
